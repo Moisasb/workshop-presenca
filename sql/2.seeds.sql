@@ -1,9 +1,3 @@
--- ============================================================
---  02_SEEDS.SQL
---  Dados de exemplo para testes
---  Execute após o 01_schema.sql
--- ============================================================
-
 USE workshop_db;
 
 -- Workshop de exemplo
