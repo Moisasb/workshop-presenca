@@ -1,8 +1,3 @@
--- ============================================================
---  01_SCHEMA.SQL
---  Criação do banco de dados e tabelas
---  Sistema de Presença em Workshops
--- ============================================================
 
 CREATE DATABASE IF NOT EXISTS workshop_db
   CHARACTER SET utf8mb4
@@ -10,7 +5,6 @@ CREATE DATABASE IF NOT EXISTS workshop_db
 
 USE workshop_db;
 
--- Workshops disponíveis
 CREATE TABLE IF NOT EXISTS workshop (
     id            INT             NOT NULL AUTO_INCREMENT,
     nome          VARCHAR(150)    NOT NULL,
@@ -25,7 +19,6 @@ CREATE TABLE IF NOT EXISTS workshop (
     PRIMARY KEY (id)
 );
 
--- Participantes cadastrados
 CREATE TABLE IF NOT EXISTS participante (
     id         INT           NOT NULL AUTO_INCREMENT,
     nome       VARCHAR(150)  NOT NULL,
@@ -37,7 +30,6 @@ CREATE TABLE IF NOT EXISTS participante (
     UNIQUE KEY uq_email (email)
 );
 
--- Inscrições: vínculo entre participante e workshop
 CREATE TABLE IF NOT EXISTS inscricao (
     id               INT       NOT NULL AUTO_INCREMENT,
     workshop_id      INT       NOT NULL,
@@ -50,7 +42,6 @@ CREATE TABLE IF NOT EXISTS inscricao (
     CONSTRAINT fk_inscricao_participante FOREIGN KEY (participante_id)  REFERENCES participante(id)
 );
 
--- Registro de presença por dia/sessão
 CREATE TABLE IF NOT EXISTS presenca (
     id           INT      NOT NULL AUTO_INCREMENT,
     inscricao_id INT      NOT NULL,
@@ -64,7 +55,6 @@ CREATE TABLE IF NOT EXISTS presenca (
     CONSTRAINT fk_presenca_inscricao FOREIGN KEY (inscricao_id) REFERENCES inscricao(id)
 );
 
--- Certificados emitidos para quem cumpriu os requisitos
 CREATE TABLE IF NOT EXISTS certificado (
     id                INT          NOT NULL AUTO_INCREMENT,
     inscricao_id      INT          NOT NULL UNIQUE,
